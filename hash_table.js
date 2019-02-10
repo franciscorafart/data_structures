@@ -19,6 +19,7 @@ HashTable.prototype.add = function(key,value){
     // Find if index is used
     if(this.table[index] == null)
         this.table[index] = []
+
     // Insert key-value pair
     this.table[index].push([key, value])
 }
@@ -26,8 +27,8 @@ HashTable.prototype.add = function(key,value){
 HashTable.prototype.get = function(key){
     let index = hashFunc(key)
     let value = null
-    //If more than one element
     let bucket = this.table[index]
+
     if(bucket){
         for (let el of bucket){
             if(el[0] == key){
@@ -36,6 +37,7 @@ HashTable.prototype.get = function(key){
             }
         }
     }
+
     return value
 }
 
@@ -52,3 +54,4 @@ console.log('myHashTable.get("phone")', myHashTable.get('phone'))
 console.log('myHashTable.get("padre")', myHashTable.get('padre'))
 console.log('myHashTable.get("madre")', myHashTable.get('madre'))
 console.log('myHashTable.get("address")', myHashTable.get('address'))
+console.log('myHashTable.get("not_in_hastable")', myHashTable.get('not_in_hastable'))
