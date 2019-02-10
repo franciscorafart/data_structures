@@ -43,9 +43,9 @@ HashTable.prototype.get = function(key){
 
 let myHashTable = new HashTable()
 
-myHashTable.add('address', '30 Carruth St, Quincy MA')
+myHashTable.add('address', '48 Carrot St, Boston MA')
 myHashTable.add('name', 'Francisco Rafart')
-myHashTable.add('phone', '8578003797')
+myHashTable.add('phone', '3075004727')
 myHashTable.add('padre', 'Horacio')
 myHashTable.add('madre', 'Alejandra')
 
