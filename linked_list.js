@@ -1,5 +1,4 @@
 //Linked list
-
 function Node(value, index){
     this.next = null
     this.value = value
@@ -17,18 +16,16 @@ LinkedList.prototype.push = function(value){
     this.length += 1
     let node = new Node(value, index)
 
-    //Assign initial node
-    if(this.initialNode === null){
-        this.initialNode = node
-        this.lastNode = node
-    } else {
+    if(this.initialNode){
         // last node's next
         this.lastNode.next = node
-        //reassign
+        // Reassign last node to new one
         this.lastNode = this.lastNode.next
+    } else {
+        //Assign initial node
+        this.initialNode = node
+        this.lastNode = node
     }
-
-
 }
 
 LinkedList.prototype.get = function(i){
@@ -44,16 +41,16 @@ LinkedList.prototype.get = function(i){
     return value
 }
 
+// Evaluation
+// let myLinkedList = new LinkedList()
+
 let firstNode = new Node('Lola')
+let myLinkedList = new LinkedList(firstNode)
 
-let myLL = new LinkedList(firstNode)
-// let myLL = new LinkedList()
+myLinkedList.push('Juan')
+myLinkedList.push('Pablo')
+myLinkedList.push('Bob')
+myLinkedList.push('Jack')
 
-// myLL.push(1)
-myLL.push('Juan')
-myLL.push('Pablo')
-myLL.push('Bob')
-myLL.push('Jack')
-
-console.log(myLL)
-console.log('myLL.get(3): ', myLL.get(3))
+console.log(myLinkedList)
+console.log('myLL.get(3): ', myLinkedList.get(3))
