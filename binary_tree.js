@@ -9,11 +9,11 @@ function Node(x){
 Node.prototype.add = function(x,y){
     if(x){
         let leftNode = new Node(x);
-        this.right_val = leftNode
+        this.left_val = leftNode
     }
     if(y){
         let rightNode = new Node(y);
-        this.left_val = rightNode
+        this.right_val = rightNode
     }
 }
 
@@ -29,12 +29,12 @@ Node.prototype.getNode = function(x){
     return node
 }
 
-Node.prototype.getNodeValue = function(x){
+Node.prototype.hasNode = function(x){
     let node = this.getNode(x)
     if (node)
-        return node.value
+        return true
 
-    return null
+    return false
 }
 
 Node.prototype.insertNodeAt = function(val,x,y){
@@ -45,3 +45,21 @@ Node.prototype.insertNodeAt = function(val,x,y){
     }
     return false
 }
+
+Node.prototype.createTree = function(arr){
+    //sort
+    let sortedArray = arr.sort((x,y) => {return x<y})
+    console.log(sortedArray)
+
+    // pick one in the middle and branch out adding elements recursively
+}
+
+//Create tree
+let node = new Node(50)
+node.add(25,75)
+node.getNode(25).add(12,37)
+node.getNode(75).add(63,87)
+
+
+
+console.log('node: ', node)
