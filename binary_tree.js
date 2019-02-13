@@ -1,5 +1,4 @@
 //Node
-
 function Node(x){
     this.value = x
     this.left_val = null;
@@ -46,12 +45,23 @@ Node.prototype.insertNodeAt = function(val,x,y){
     return false
 }
 
-Node.prototype.createTree = function(arr){
-    //sort
-    let sortedArray = arr.sort((x,y) => {return x<y})
-    console.log(sortedArray)
+const createTree = (arr) => {
 
+    //helper function
+    // const creatBranch = (nod, x, y) => {
+    //     nod.add(x,y)
+    // }
+
+    //sort
+    let sortedArray = arr.sort((x,y) => {return x>y});
     // pick one in the middle and branch out adding elements recursively
+    let middleIndex = Math.abs(arr.length/2);
+    let node = new Node(sortedArray[middleIndex]);
+
+
+
+    //split array
+
 }
 
 //Create tree
@@ -60,6 +70,7 @@ node.add(25,75)
 node.getNode(25).add(12,37)
 node.getNode(75).add(63,87)
 
+let tree = createTree([5,6,2,8,5,3,7])
 
-
+console.log('tree: ', tree)
 console.log('node: ', node)
