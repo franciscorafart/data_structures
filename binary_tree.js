@@ -112,31 +112,30 @@ Node.prototype.breadthTraverse = function(rootNode){
     return result
 }
 
-//TODO: fix createTree function
 const createTree = (arr) => {
+    let node = null
 
-    if(arr.length<=1)
-        return new Node(arr[0])
+    if(arr.length<=1){
+        node = new Node(arr[0])
+    } else {
+        // Sort
+        let sortedArray = arr.sort((x,y) => {return x>y});
+        // Pick one in the middle and branch out adding elements recursively
+        let middleIndex = Math.floor(arr.length/2);
+        node = new Node(sortedArray[middleIndex]);
 
-    // Sort
-    let sortedArray = arr.sort((x,y) => {return x>y});
-    // Pick one in the middle and branch out adding elements recursively
-    let middleIndex = Math.floor(arr.length/2);
-    node = new Node(sortedArray[middleIndex]);
-    console.log('sortedArray: ',sortedArray, ' ,middleIndex: ', middleIndex)
+        // Split array
+        let arrayLeft = sortedArray.splice(0,middleIndex);
+        let arrayRight = sortedArray.splice(1, sortedArray.length);
 
-    // Split array
-    let arrayLeft = sortedArray.splice(0,middleIndex);
-    let arrayRight = sortedArray.splice(1, sortedArray.length);
+        console.log(arrayLeft, ' - ', sortedArray[0], ' - ', arrayRight);
 
-    console.log(arrayLeft, ' - ', sortedArray[0], ' - ', arrayRight);
+        if(arrayLeft)
+            node.left_val = createTree(arrayLeft)
+        if(arrayRight)
+            node.right_val = createTree(arrayRight)
+    }
 
-    if(arrayLeft)
-        node.left_val = createTree(arrayLeft)
-    if(arrayRight)
-        node.right_val = createTree(arrayRight)
-
-    console.log('node', node)
     return node
 }
 
@@ -151,10 +150,11 @@ node.add(25,75)
         node.getNode(87).add(81,93)
 
 console.log('node: ', node)
-
 console.log('recursiveTraverse', node.recursiveTraverse())
 console.log('Depth Traverse', node.depthTraverse())
 console.log('Breadth Traverse',node.breadthTraverse())
 
-// let tree = createTree([5,6,2,8,5,3,7])
-// console.log('tree: ', tree)
+//Create Tree automatically
+let tree = createTree([5,6,2,8,0,3,7])
+console.log('tree: ', tree)
+console.log('tree Depth Traverse', tree.depthTraverse())
