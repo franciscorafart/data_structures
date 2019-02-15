@@ -80,6 +80,7 @@ Node.prototype.depthTraverse = function(rootNode){
         let currentNode = stack.pop()
         // console.log(currentNode.value)
         spreadResult.push(currentNode.value)
+
         if(currentNode.right_val){
             stack.push(currentNode.right_val)
         }
@@ -97,7 +98,7 @@ Node.prototype.breadthTraverse = function(rootNode){
     let result = []
 
     while(queue.length>0){
-        // remove item in new array and pop it to get value
+        // remove item from queue as array and pop it to get value
         let currentNode = queue.splice(0,1).pop()
         // console.log(currentNode.value)
         result.push(currentNode.value)
@@ -155,6 +156,6 @@ console.log('Depth Traverse', node.depthTraverse())
 console.log('Breadth Traverse',node.breadthTraverse())
 
 //Create Tree automatically
-let tree = createTree([5,6,2,8,0,3,7])
+let tree = createTree([5,6,2,8,0,3,7,9])
 console.log('tree: ', tree)
 console.log('tree Depth Traverse', tree.depthTraverse())
