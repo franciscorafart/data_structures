@@ -52,21 +52,64 @@ Node.prototype.isLeaf = function(node){
     return false
 }
 
-Node.prototype.recursiveTraverse = function(rootNode){
+Node.prototype.recursiveTraverse = function(rootNode, spreadResult){
     if(rootNode == null)
         rootNode = this
-
-    console.log(rootNode.value)
+    if(spreadResult == null)
+        spreadResult = []
+    // console.log(rootNode.value)
+    spreadResult.push(rootNode.value)
 
     if(rootNode.left_val){
-        this.recursiveTraverse(rootNode.left_val)
+        this.recursiveTraverse(rootNode.left_val, spreadResult)
     }
     if(rootNode.right_val){
-        this.recursiveTraverse(rootNode.right_val)
+        this.recursiveTraverse(rootNode.right_val, spreadResult)
     }
-    // if(rootNode.isLeaf()){
-    //
-    // }
+
+    return spreadResult
+}
+
+Node.prototype.depthTraverse = function(rootNode){
+    if(rootNode == null)
+        rootNode = this
+    let spreadResult = []
+    let stack = [rootNode]
+
+    while(stack.length>0){
+        let currentNode = stack.pop()
+        // console.log(currentNode.value)
+        spreadResult.push(currentNode.value)
+        if(currentNode.right_val){
+            stack.push(currentNode.right_val)
+        }
+        if(currentNode.left_val){
+            stack.push(currentNode.left_val)
+        }
+    }
+    return spreadResult
+}
+
+Node.prototype.breadthTraverse = function(rootNode){
+    if (rootNode == null)
+        rootNode = this
+    let queue = [rootNode]
+    let result = []
+
+    while(queue.length>0){
+        // remove item in new array and pop it to get value
+        let currentNode = queue.splice(0,1).pop()
+        // console.log(currentNode.value)
+        result.push(currentNode.value)
+
+        if(currentNode.left_val){
+            queue.push(currentNode.left_val)
+        }
+        if(currentNode.right_val){
+            queue.push(currentNode.right_val)
+        }
+    }
+    return result
 }
 
 //TODO: fix createTree function
@@ -109,7 +152,9 @@ node.add(25,75)
 
 console.log('node: ', node)
 
-node.recursiveTraverse()
+console.log('recursiveTraverse', node.recursiveTraverse())
+console.log('Depth Traverse', node.depthTraverse())
+console.log('Breadth Traverse',node.breadthTraverse())
 
 // let tree = createTree([5,6,2,8,5,3,7])
 // console.log('tree: ', tree)
