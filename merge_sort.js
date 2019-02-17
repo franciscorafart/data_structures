@@ -13,21 +13,33 @@ const merge = (arr1,arr2) => {
     return result
 }
 
-const mergesort(arr, result) => {
-    if(result== null)
-        result = []
+const mergesort(arr) => {
+    // const middleIndex = Math.floor(array.length/2)
+    // const arr1 = arr.splice(0,middleIndex+1), arr2 = arr;
+    //
+    // if(arr1.length<=2 && arr2.length<=2){
+    //     // order and merge merge
+    //     arr1[0]
+    // } else {
+    //     // mergesort
+    //     mergesort()
+    // }
+    //
+    // return
 
-    const middleIndex = Math.floor(array.length/2)
-    const arr1 = arr.splice(0,middleIndex+1), arr2 = arr;
-
-    if(arr1.length<=2 && arr2.length<=2){
-        // merge
-    } else {
-        // mergesort
-        mergesort()
+    // TODO: Alternative 
+    let arrOfArrs = arr.map(el => {return [el]})
+    let merged = []
+    for (let i=0; i<arrOfArrs.length; i++){
+        if(i%2==0){
+            //case odd array last element
+            if(i==arrOfArrs.length-1){
+                merged.push(arrOfArrs[i])
+            } else {
+                merged.push(merge(arrOfArrs[i],arrOfArrs[i+1]))
+            }
+        }
     }
-
-    return
 }
 //split array and call mergesort
 
