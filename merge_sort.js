@@ -1,47 +1,36 @@
-let array = [5,8,3,9,34,56,23,0,68,90,23]
+let array = [5,8,3,9,34,56,23,0,4]
 
-const merge = (arr1,arr2) => {
+let merge = (arr1,arr2) => {
     let result = []
     // compare elements in array
     while(arr1.length>0 || arr2.length>0){
-        let val1 = arr1[0] || Number.NEGATIVE_INFITINIY;
-        let val2 = arr2[0] || Number.POSITIVE_INFINITY;
-        (val1<val2)?
-            result.push(arr1.splice(0,1).pop()): //remove first element
+        let val1 = arr1[0] || Number.NEGATIVE_INFINITY;
+        let val2 = arr2[0] || Number.NEGATIVE_INFINITY;
+
+        if(arr1.length && arr2.length){
+            (val1<val2)?
+                result.push(arr1.splice(0,1).pop()): //remove first element
+                result.push(arr2.splice(0,1).pop())
+        } else if (arr1.length) {
+            result.push(arr1.splice(0,1).pop())
+        } else if (arr2.length) {
             result.push(arr2.splice(0,1).pop())
+        }
     }
     return result
 }
 
-const mergesort(arr) => {
-    // const middleIndex = Math.floor(array.length/2)
-    // const arr1 = arr.splice(0,middleIndex+1), arr2 = arr;
-    //
-    // if(arr1.length<=2 && arr2.length<=2){
-    //     // order and merge merge
-    //     arr1[0]
-    // } else {
-    //     // mergesort
-    //     mergesort()
-    // }
-    //
-    // return
+let mergesort = (arr) => {
+    if (arr.length<=1)
+        return arr;
 
-    // TODO: Alternative 
-    let arrOfArrs = arr.map(el => {return [el]})
-    let merged = []
-    for (let i=0; i<arrOfArrs.length; i++){
-        if(i%2==0){
-            //case odd array last element
-            if(i==arrOfArrs.length-1){
-                merged.push(arrOfArrs[i])
-            } else {
-                merged.push(merge(arrOfArrs[i],arrOfArrs[i+1]))
-            }
-        }
-    }
+    const middleIndex = Math.floor(arr.length/2)
+    const arr1 = arr.slice(0,middleIndex);
+    const arr2 = arr.slice(middleIndex,arr.length);
+
+    console.log(arr)
+
+    return merge(mergesort(arr1), mergesort(arr2))
 }
-//split array and call mergesort
 
-// let testArr1 = [5,9], testArr2 = [6,7
-// console.log(merge(testArr1, testArr2))
+console.log('mergesort', array,'=', mergesort(array))
